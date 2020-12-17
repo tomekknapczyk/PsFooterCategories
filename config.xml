@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
-	<name>mafisz_cat_home</name>
-	<displayName><![CDATA[Mafisz kategorie na stronie głównej]]></displayName>
+	<name>mafisz_cat_footer</name>
+	<displayName><![CDATA[Mafisz kategorie w stopce]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Siatka kategorii na stronie głównej]]></description>
+	<description><![CDATA[Lista kategorii w stopce]]></description>
 	<author><![CDATA[Mafisz]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>1</is_configurable>

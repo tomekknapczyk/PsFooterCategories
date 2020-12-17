@@ -1,2 +1,2 @@
-# PsHomeCategories
-Prestashop module showing categories on home
+# PsFooterCategories
+Prestashop module showing categories on footer

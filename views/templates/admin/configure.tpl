@@ -13,8 +13,8 @@
 *}
 
 <div class="panel">
-	<h3><i class="icon icon-credit-card"></i> {l s='Mafisz kategorie na stronie głównej' mod='mafisz_cat_home'}</h3>
+	<h3><i class="icon icon-credit-card"></i> {l s='Mafisz kategorie w stopce' mod='mafisz_cat_footer'}</h3>
 	<p>
-		<strong>{l s='Siatka kategorii na stronie głównej' mod='mafisz_cat_home'}</strong><br />
+		<strong>{l s='Lista kategorii w stopce' mod='mafisz_cat_footer'}</strong><br />
 	</p>
 </div>

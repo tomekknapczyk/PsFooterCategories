@@ -19,13 +19,13 @@ if (!defined('_PS_VERSION_')) {
 
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 
-class Mafisz_Cat_Home extends Module implements WidgetInterface
+class Mafisz_Cat_Footer extends Module implements WidgetInterface
 {
     protected $config_form = false;
 
     public function __construct()
     {
-        $this->name = 'mafisz_cat_home';
+        $this->name = 'mafisz_cat_footer';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
         $this->author = 'Mafisz';
@@ -35,20 +35,20 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
 
         parent::__construct();
 
-        $this->displayName = $this->l('Mafisz kategorie na stronie głównej');
-        $this->description = $this->l('Siatka kategorii na stronie głównej');
+        $this->displayName = $this->l('Mafisz kategorie w stopce');
+        $this->description = $this->l('Lista kategorii w stopce');
 
         $this->confirmUninstall = $this->l('');
 
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
 
-        $this->templateFile = 'module:mafisz_cat_home/mafisz_cat_home.tpl';
+        $this->templateFile = 'module:mafisz_cat_footer/mafisz_cat_footer.tpl';
     }
 
     public function install()
     {
-        Configuration::updateValue('MAFISZ_CAT_HOME_COUNT', 1);
-        Configuration::updateValue('MAFISZ_CAT_HOME_ID', 2);
+        Configuration::updateValue('MAFISZ_CAT_FOOTER_COUNT', 1);
+        Configuration::updateValue('MAFISZ_CAT_FOOTER_ID', 2);
 
         include(dirname(__FILE__).'/sql/install.php');
 
@@ -59,8 +59,8 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
 
     public function uninstall()
     {
-        Configuration::deleteByName('MAFISZ_CAT_HOME_COUNT');
-        Configuration::deleteByName('MAFISZ_CAT_HOME_ID');
+        Configuration::deleteByName('MAFISZ_CAT_FOOTER_COUNT');
+        Configuration::deleteByName('MAFISZ_CAT_FOOTER_ID');
 
         include(dirname(__FILE__).'/sql/uninstall.php');
 
@@ -75,7 +75,7 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
         /**
          * If values have been submitted in the form, process.
          */
-        if (((bool)Tools::isSubmit('submitMafisz_cat_homeModule')) == true) {
+        if (((bool)Tools::isSubmit('submitMafisz_cat_footerModule')) == true) {
             $this->postProcess();
         }
 
@@ -100,7 +100,7 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
         $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG', 0);
 
         $helper->identifier = $this->identifier;
-        $helper->submit_action = 'submitMafisz_cat_homeModule';
+        $helper->submit_action = 'submitMafisz_cat_footerModule';
         $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
             .'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
         $helper->token = Tools::getAdminTokenLite('AdminModules');
@@ -122,14 +122,14 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
                         'type' => 'text',
                         'label' => $this->l('Ilość kategorii'),
                         'class' => 'input fixed-width-sm',
-                        'name' => 'MAFISZ_CAT_HOME_COUNT',
+                        'name' => 'MAFISZ_CAT_FOOTER_COUNT',
                         'desc' => $this->l('Ilość wyświetlanych kategorii'),
                     ),
                     array(
                         'type' => 'text',
                         'label' => $this->l('Id kategorii'),
                         'class' => 'input fixed-width-sm',
-                        'name' => 'MAFISZ_CAT_HOME_ID',
+                        'name' => 'MAFISZ_CAT_FOOTER_ID',
                         'desc' => $this->l('Id kategorii, z której mają być wyświetlone podkategorie'),
                     ),
                 ),
@@ -150,8 +150,8 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
         $values = [];
 
         $default_config = array(
-            'MAFISZ_CAT_HOME_COUNT' => Configuration::get('MAFISZ_CAT_HOME_COUNT', 1),
-            'MAFISZ_CAT_HOME_ID' => Configuration::get('MAFISZ_CAT_HOME_ID', 2)
+            'MAFISZ_CAT_FOOTER_COUNT' => Configuration::get('MAFISZ_CAT_FOOTER_COUNT', 1),
+            'MAFISZ_CAT_FOOTER_ID' => Configuration::get('MAFISZ_CAT_FOOTER_ID', 2)
         );
 
         $values = array_merge($values, $default_config);
@@ -164,8 +164,8 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
      */
     protected function postProcess()
     {
-        Configuration::updateValue('MAFISZ_CAT_HOME_COUNT', Tools::getValue('MAFISZ_CAT_HOME_COUNT'));
-        Configuration::updateValue('MAFISZ_CAT_HOME_ID', Tools::getValue('MAFISZ_CAT_HOME_ID'));
+        Configuration::updateValue('MAFISZ_CAT_FOOTER_COUNT', Tools::getValue('MAFISZ_CAT_FOOTER_COUNT'));
+        Configuration::updateValue('MAFISZ_CAT_FOOTER_ID', Tools::getValue('MAFISZ_CAT_FOOTER_ID'));
     }
 
     /**
@@ -190,11 +190,11 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
 
     public function renderWidget($hookName = null, array $configuration = [])
     {
-        if (!$this->isCached($this->templateFile, $this->getCacheId('mafisz_cat_home'))) {
+        if (!$this->isCached($this->templateFile, $this->getCacheId('mafisz_cat_footer'))) {
             $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
         }
 
-        return $this->fetch($this->templateFile, $this->getCacheId('mafisz_cat_home'));
+        return $this->fetch($this->templateFile, $this->getCacheId('mafisz_cat_footer'));
     }
 
     public function getWidgetVariables($hookName = null, array $configuration = [])
@@ -202,8 +202,8 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
         $lang = $this->context->language->id;
         $shop = $this->context->shop->id;
 
-        $count = Configuration::get('MAFISZ_CAT_HOME_COUNT', 1);
-        $parent = Configuration::get('MAFISZ_CAT_HOME_ID', 2);
+        $count = Configuration::get('MAFISZ_CAT_FOOTER_COUNT', 1);
+        $parent = Configuration::get('MAFISZ_CAT_FOOTER_ID', 2);
         $cats = Category::getCategories($lang, true, true);
 
         $i = 0;
@@ -214,9 +214,6 @@ class Mafisz_Cat_Home extends Module implements WidgetInterface
                     $id = $value['infos']['id_category'];
                     $category = new Category($id, $lang, $shop);
                     $cat['name'] = $category->name;
-                    $cat['description'] = $category->description;
-                    $cat['id'] = $id;
-                    $cat['link_rewrite'] = $category->link_rewrite;
                     $cat['url'] = $this->context->link->getCategoryLink($category);
                     $categories[] = $cat;
                 }
