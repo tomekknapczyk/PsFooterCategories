@@ -22,5 +22,5 @@
             </a>
         </li>
         {/foreach}
-    </div>
+    </ul>
 </div>
